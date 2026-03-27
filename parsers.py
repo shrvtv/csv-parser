@@ -1,7 +1,7 @@
-from itertools import chain
+import csv, itertools
 
 
-def parser(
+def csv_parser(
         filenames: list[str],
         formula: str,
         column: str
