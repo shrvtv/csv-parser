@@ -2,7 +2,7 @@
 import argparse
 from tabulate import tabulate
 
-from parsers import csv_parser
+from parsers import CSVParser
 
 
 def main():
@@ -32,7 +32,8 @@ def main():
     )
 
     args = argument_parser.parse_args()
-    result = csv_parser(args.files, args.formula, args.column)
+    csv_parser = CSVParser()
+    result = csv_parser.parse(args.files, args.formula, args.column)
     print(tabulate(result, headers="keys", tablefmt="grid"))
 
 if __name__ == "__main__":
