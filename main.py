@@ -39,7 +39,7 @@ class CSVParser:
 
     def parse(
         self, filenames: list[str], formula: str, columns: list[str]
-    ) -> list[tuple[str, str]]:
+    ) -> list[tuple[str, int]]:
         match formula:
             case "median":
                 func = statistics.median
@@ -53,7 +53,7 @@ class CSVParser:
             columns[1]
         )
         applied_func_to_values = {
-            k: str(int(func(v))) for k, v in grouped_by_first_column.items()
+            k: int(func(v)) for k, v in grouped_by_first_column.items()
         }
         converted_from_dict_to_tuples = applied_func_to_values.items()
         sorted_down_by_second_column = sorted(
