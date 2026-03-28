@@ -2,6 +2,8 @@ import csv
 import itertools
 import statistics
 
+from collections import defaultdict
+
 
 class CSVParser:
     @staticmethod
@@ -21,6 +23,20 @@ class CSVParser:
             {k: v for k, v in line.items() if k in columns} for line in dataset
         ]
 
+    @staticmethod
+    def group_by_column_into_dict(
+            dataset: list[dict[str, str]],
+            column_k: str,
+            column_v: str
+    ) -> defaultdict[str, list[str]]:
+        result = defaultdict(list)
+        if len(dataset[0]) != 2:
+            raise ValueError("Unsupported dataset dimensions")
+
+        for line in dataset:
+            result[line[column_k]].append(line[column_v])
+        return result
+
     def parse(
             self,
             filenames: list[str],
@@ -34,4 +50,9 @@ class CSVParser:
                 raise ValueError("Unsupported formula provided")
         dataset = self.merge_files(filenames)
         filtered_dataset = self.filter_columns(dataset, columns)
-        return filtered_dataset
+        grouped_by_first_column = self.group_by_column_into_dict(
+            filtered_dataset,
+            columns[0],
+            columns[1]
+        )
+        return grouped_by_first_column
