@@ -16,8 +16,7 @@ class CSVParser:
 
     @staticmethod
     def filter_columns(
-            dataset: list[dict[str, str]],
-            columns = list[str]
+        dataset: list[dict[str, str]], columns = list[str]
     ) -> list[dict[str, str]]:
         return [
             {k: v for k, v in line.items() if k in columns} for line in dataset
@@ -25,9 +24,7 @@ class CSVParser:
 
     @staticmethod
     def group_by_column_into_dict(
-            dataset: list[dict[str, str]],
-            column_k: str,
-            column_v: str
+        dataset: list[dict[str, str]], column_k: str, column_v: str
     ) -> defaultdict[str, list[float]]:
         result = defaultdict(list)
         if len(dataset[0]) != 2:
@@ -38,11 +35,8 @@ class CSVParser:
         return result
 
     def parse(
-            self,
-            filenames: list[str],
-            formula: str,
-            columns: list[str]
-    ) -> list[dict[str, str]]:
+        self, filenames: list[str], formula: str, columns: list[str]
+    ) -> list[tuple[str, str]]:
         match formula:
             case "median":
                 func = statistics.median
