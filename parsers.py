@@ -28,13 +28,13 @@ class CSVParser:
             dataset: list[dict[str, str]],
             column_k: str,
             column_v: str
-    ) -> defaultdict[str, list[str]]:
+    ) -> defaultdict[str, list[float]]:
         result = defaultdict(list)
         if len(dataset[0]) != 2:
             raise ValueError("Unsupported dataset dimensions")
 
         for line in dataset:
-            result[line[column_k]].append(line[column_v])
+            result[line[column_k]].append(float(line[column_v]))
         return result
 
     def parse(
@@ -55,4 +55,9 @@ class CSVParser:
             columns[0],
             columns[1]
         )
-        return grouped_by_first_column
+        applied_func_to_values = {
+            k: func(v) for k, v in grouped_by_first_column.items()
+        }
+        converted_from_dict_to_tuples = applied_func_to_values.items()
+        print(converted_from_dict_to_tuples)
+        return converted_from_dict_to_tuples
