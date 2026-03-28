@@ -19,7 +19,7 @@ class CSVParser:
 
     @staticmethod
     def filter_columns(
-        dataset: list[dict[str, str]], columns = list[str]
+        dataset: list[dict[str, str]], columns: list[str]
     ) -> list[dict[str, str]]:
         return [
             {k: v for k, v in line.items() if k in columns} for line in dataset
