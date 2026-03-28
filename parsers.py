@@ -1,4 +1,4 @@
-import csv, itertools
+import csv, itertools, statistics
 
 
 def read_csv(filename: str) -> list[dict[str, str]]:
@@ -15,5 +15,10 @@ def csv_parser(
         formula: str,
         column: str
 ) -> list[dict[str, str]]:
+    match formula:
+        case "median":
+            func = statistics.median
+        case _:
+            raise ValueError("Unsupported formula provided")
     dataset = merge_csv_files(filenames)
     return dataset
