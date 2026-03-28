@@ -4,15 +4,16 @@ import statistics
 
 
 class CSVParser:
-    def read(self, filename: str) -> list[dict[str, str]]:
+    @staticmethod
+    def read(filename: str) -> list[dict[str, str]]:
         with open(filename) as csvfile:
             return list(csv.DictReader(csvfile))
 
     def merge_files(self, filenames: list[str]) -> list[dict[str, str]]:
         return list(itertools.chain.from_iterable(map(self.read, filenames)))
 
+    @staticmethod
     def filter_columns(
-            self,
             dataset: list[dict[str, str]],
             columns = list[str]
     ) -> list[dict[str, str]]:
