@@ -59,5 +59,7 @@ class CSVParser:
             k: func(v) for k, v in grouped_by_first_column.items()
         }
         converted_from_dict_to_tuples = applied_func_to_values.items()
-        print(converted_from_dict_to_tuples)
-        return converted_from_dict_to_tuples
+        sorted_down_by_second_column = sorted(
+            converted_from_dict_to_tuples, key=lambda t: t[1], reverse=True
+        )
+        return sorted_down_by_second_column
