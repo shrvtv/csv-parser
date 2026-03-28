@@ -14,13 +14,15 @@ class CSVParser:
             dataset: list[dict[str, str]],
             columns = list[str]
     ) -> list[dict[str, str]]:
-        pass
+        return [
+            {k: v for k, v in line.items() if k in columns} for line in dataset
+        ]
 
     def parse(
             self,
             filenames: list[str],
             formula: str,
-            column: str
+            columns: list[str]
     ) -> list[dict[str, str]]:
         match formula:
             case "median":
@@ -28,5 +30,5 @@ class CSVParser:
             case _:
                 raise ValueError("Unsupported formula provided")
         dataset = self.merge_files(filenames)
-
-        return dataset
+        filtered_dataset = self.filter_columns(dataset, columns)
+        return filtered_dataset

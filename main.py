@@ -26,14 +26,23 @@ def main():
         default="median",
     )
     argument_parser.add_argument(
-        "-c", "--column",
-        help="specify the column name",
+        "-fc", "--first_column",
+        help="specify the first column name",
+        default="student"
+    )
+    argument_parser.add_argument(
+        "-sc", "--second_column",
+        help="specify the second column name",
         default="coffee_spent"
     )
 
     args = argument_parser.parse_args()
     csv_parser = CSVParser()
-    result = csv_parser.parse(args.files, args.formula, args.column)
+    result = csv_parser.parse(
+        args.files,
+        args.formula,
+        [args.first_column, args.second_column]
+    )
     print(tabulate(result, headers="keys", tablefmt="grid"))
 
 if __name__ == "__main__":
