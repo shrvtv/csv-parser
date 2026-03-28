@@ -43,7 +43,9 @@ def main():
         args.formula,
         [args.first_column, args.second_column]
     )
-    print(tabulate(result, headers="keys", tablefmt="grid"))
+    print(tabulate(
+        result, headers=(args.first_column, args.report), tablefmt="grid"
+    ))
 
 if __name__ == "__main__":
     main()
