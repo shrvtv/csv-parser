@@ -1,4 +1,6 @@
-import csv, itertools, statistics
+import csv
+import itertools
+import statistics
 
 
 class CSVParser:
