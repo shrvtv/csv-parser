@@ -209,8 +209,5 @@ __marimo__/
 # Jetbrains
 .idea/
 
-# Test data
-tests/fixtures/*.csv
-
 # Misc
 .python-version
