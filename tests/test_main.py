@@ -57,3 +57,13 @@ def test_read(csv_parser, math_csv):
         "mood": "норм",
         "exam": "Математика",
     }
+
+def test_merge_files(csv_parser, math_csv, physics_csv):
+    data = csv_parser.merge_files([math_csv, physics_csv])
+    assert len(data) == 90
+
+    assert data[0]["student"] == "Алексей Смирнов"
+    assert data[0]["exam"] == "Математика"
+
+    assert data[89]["student"] == "Михаил Павлов"
+    assert data[89]["exam"] == "Физика"
