@@ -91,3 +91,18 @@ def test_group_by_column_into_dict(csv_parser, math_csv):
     assert "Мария Соколова" in grouped_by_first_column
     assert grouped_by_first_column["Мария Соколова"] == [100.0, 120.0, 150.0]
 
+
+def test_parse_median(csv_parser, math_csv, physics_csv, programming_csv):
+    result = csv_parser.parse(
+        [math_csv, physics_csv, programming_csv], "median",
+        ["student", "coffee_spent"]
+    )
+
+    assert len(result) == 15
+    assert isinstance(result, list)
+    assert all(isinstance(item, tuple) and len(item) == 2 for item in result)
+    assert all(
+        isinstance(item[0], str)
+        and isinstance(item[1], int)
+        for item in result
+    )
