@@ -74,3 +74,20 @@ def test_filter_columns(csv_parser, math_csv):
     filtered = csv_parser.filter_columns(data, ["student", "coffee_spent"])
     assert len(filtered) == 45
     assert all(row.keys() == {"student", "coffee_spent"} for row in filtered)
+
+
+def test_group_by_column_into_dict(csv_parser, math_csv):
+    data = csv_parser.read(math_csv)
+    filtered = csv_parser.filter_columns(
+        data, ["student", "coffee_spent"]
+    )
+    grouped_by_first_column = csv_parser.group_by_column_into_dict(
+        filtered, "student", "coffee_spent"
+    )
+
+    assert len(grouped_by_first_column) == 15
+    assert "Алексей Смирнов" in grouped_by_first_column
+    assert grouped_by_first_column["Алексей Смирнов"] == [450.0, 500.0, 550.0]
+    assert "Мария Соколова" in grouped_by_first_column
+    assert grouped_by_first_column["Мария Соколова"] == [100.0, 120.0, 150.0]
+
