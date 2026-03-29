@@ -1,6 +1,30 @@
 import subprocess
 from pathlib import Path
 
+import pytest
+
+from main import CSVParser
+
+
+@pytest.fixture
+def csv_parser():
+    return CSVParser()
+
+
+@pytest.fixture
+def math_csv():
+    return "tests/fixtures/math.csv"
+
+
+@pytest.fixture
+def physics_csv():
+    return "tests/fixtures/physics.csv"
+
+
+@pytest.fixture
+def programming_csv():
+    return "tests/fixtures/programming.csv"
+
 
 def test_cli_output():
     result = subprocess.run(
