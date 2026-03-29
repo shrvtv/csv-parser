@@ -63,7 +63,7 @@ class CSVParser:
 
 
 
-def main():
+def main() -> None:
     argument_parser = argparse.ArgumentParser(
         description="Parses CSV files and forms a report"
     )
