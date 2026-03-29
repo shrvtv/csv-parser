@@ -92,7 +92,7 @@ def test_group_by_column_into_dict(csv_parser, math_csv):
     assert grouped_by_first_column["Мария Соколова"] == [100.0, 120.0, 150.0]
 
 
-def test_parse_median(csv_parser, math_csv, physics_csv, programming_csv):
+def test_parse(csv_parser, math_csv, physics_csv, programming_csv):
     result = csv_parser.parse(
         [math_csv, physics_csv, programming_csv], "median",
         ["student", "coffee_spent"]
@@ -106,3 +106,6 @@ def test_parse_median(csv_parser, math_csv, physics_csv, programming_csv):
         and isinstance(item[1], int)
         for item in result
     )
+
+    values = [item[1] for item in result]
+    assert values == sorted(values, reverse=True)
