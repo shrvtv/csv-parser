@@ -67,3 +67,10 @@ def test_merge_files(csv_parser, math_csv, physics_csv):
 
     assert data[89]["student"] == "Михаил Павлов"
     assert data[89]["exam"] == "Физика"
+
+
+def test_filter_columns(csv_parser, math_csv):
+    data = csv_parser.read(math_csv)
+    filtered = csv_parser.filter_columns(data, ["student", "coffee_spent"])
+    assert len(filtered) == 45
+    assert all(row.keys() == {"student", "coffee_spent"} for row in filtered)
